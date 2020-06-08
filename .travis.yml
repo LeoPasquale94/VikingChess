@@ -1,0 +1,12 @@
+install: gradle wrapper --gradle-version 6.1
+language:
+  - scala
+  - java
+scala:
+  - 2.12.8
+java:
+  - 1.8.0
+jdk:
+  -openjdk8
+script:
+  - ./gradlew clean build
