@@ -1,6 +1,6 @@
 package view;
 
-import features.Coordinate;
+import utils.Coordinate;
 
 import javax.swing.*;
 import java.awt.*;

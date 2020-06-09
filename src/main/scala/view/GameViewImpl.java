@@ -1,7 +1,7 @@
 package view;
 
-import controller.Controller;
-import features.Coordinate;
+import Controller.TryController;
+import utils.Coordinate;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,17 +13,16 @@ import java.util.Optional;
 public class GameViewImpl implements GameView, ActionListener {
     public int dimension;
     private JFrame frame;
-    private JPanel overlayPanel,gamePanel,northPanel,southPanel,boardPanel,boardPlusColumns,menuPanel, leftPanel, rightPanel;
-    private JButton menuButton;
+    private JPanel overlayPanel,gamePanel, menuPanel;
     private HashMap<Coordinate, JButton> cells;
     private ScalaViewFactory viewFactory;
-    public Controller controller;
+    public TryController controller;
     public ArrayList<Coordinate> possibleMoves;
     private Optional<Coordinate> selectedCell = Optional.empty();
     private Menu menuUtils;
     private Game gameUtils;
 
-    public GameViewImpl(Controller controller){
+    public GameViewImpl(TryController controller){
         this.controller = controller;
         dimension = 11;
         cells = new HashMap<>();

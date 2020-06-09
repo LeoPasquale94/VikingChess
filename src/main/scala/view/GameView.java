@@ -1,6 +1,6 @@
 package view;
 
-import features.Coordinate;
+import utils.Coordinate;
 
 import java.util.ArrayList;
 
