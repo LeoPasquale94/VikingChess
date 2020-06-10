@@ -3,8 +3,10 @@ import org.junit.runner.RunWith
 import org.scalatest._
 import org.scalatest.junit.JUnitRunner
 
+import scala.runtime.Nothing$
+
 @RunWith(classOf[JUnitRunner])
-abstract class UtilsListTests extends FunSuite with Matchers {
+class UtilsListTests extends FunSuite {
   val prolog: Prolog = new Prolog()
   val theory: Theory = new Theory("src/main/scala/model/gameRulesListOfList.pl")
   var goal: SolveInfo = _
