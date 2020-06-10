@@ -96,7 +96,6 @@ public class Game {
             Pair<Int> coordinateArrival = getCoordinate(cell);
             Tuple3 tuple = gameViewImpl.setMove(coordinateStart, coordinateArrival);
             Board board = (Board) tuple._1();
-            System.out.println(board);
             new Thread(() -> {
                     setPawns(board.cells());
                     setColorBackground(new Color(83, 143, 159));
@@ -120,7 +119,6 @@ public class Game {
 
     public void moveRequest(Pair<Int> coord) {
         possibleMoves = gameViewImpl.getPossibleMoves(coord);
-        System.out.println(possibleMoves.size());
         setColorBackground(new Color(41,71,79));
     }
 

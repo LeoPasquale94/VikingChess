@@ -82,7 +82,6 @@ public class GameViewImpl implements GameView, ActionListener {
     }
 
     public List<Pair<Int>> getPossibleMoves(Pair coord) {
-        System.out.println(coord.getX() + " " + coord.getY());
         return controller.getPossibleMoves(coord);
     }
 
