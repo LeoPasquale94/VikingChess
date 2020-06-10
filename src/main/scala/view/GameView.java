@@ -1,6 +1,5 @@
 package view;
 
-import utils.Coordinate;
 import utils.Pair;
 
 import java.util.ArrayList;

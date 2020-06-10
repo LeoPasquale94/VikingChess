@@ -4,7 +4,7 @@ import java.awt.event.{MouseAdapter, MouseEvent}
 import java.awt.{Color, Component, Cursor, Dimension, Font, Graphics, GraphicsEnvironment, GridLayout, Image}
 import java.io.File
 
-import features.ScreenSize
+import utils.ScreenSize
 import javax.imageio.ImageIO
 import javax.swing.border.LineBorder
 import javax.swing.{Box, BoxLayout, ImageIcon, JButton, JFrame, JLabel, JMenuItem, JPanel, JPopupMenu, OverlayLayout, SwingConstants}
