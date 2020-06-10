@@ -29,6 +29,7 @@ public class Game {
     private List<Pair<Int>> possibleMoves;
     private Optional<Pair> selectedCell = Optional.empty();
     private Board board;
+    private ColorProvider colorProvider;
 
 
 
@@ -37,6 +38,7 @@ public class Game {
         gameViewImpl = GVImpl;
         cells = new HashMap<>();
         possibleMoves = new ArrayList<>();
+        colorProvider = new ColorProvider.ColorProviderImpl();
 
     }
 
@@ -90,20 +92,24 @@ public class Game {
             selectedCell = Optional.of(getCoordinate(cell));
             moveRequest(getCoordinate(cell));
         } else if(!possibleMoves.isEmpty() &&  !possibleMoves.contains(getCoordinate(cell))) {
-            setColorBackground( new Color(83, 143, 159));
+            setColorBackground(colorProvider.getNormalCellColor());
             deselectCell();
         }else if(possibleMoves.contains(getCoordinate(cell)) && selectedCell.isPresent()){
             Pair<Int> coordinateStart = selectedCell.get();
             Pair<Int> coordinateArrival = getCoordinate(cell);
-            Tuple3 tuple = gameViewImpl.setMove(coordinateStart, coordinateArrival);
-            Board board = (Board) tuple._1();
-            setPawns(board.cells());
-            setColorBackground(new Color(83, 143, 159));
-            deselectCell();
-            boardPanel.validate();
-            rightPanel.add(viewFactory.createLostWhitePawn());
-            rightPanel.validate();
+            moveAndPaint(coordinateStart, coordinateArrival);
         }
+    }
+
+    private void moveAndPaint(Pair<Int> coordStart, Pair<Int> coordArr) {
+        Tuple3 tuple = gameViewImpl.setMove(coordStart, coordArr);
+        Board board = (Board) tuple._1();
+        setPawns(board.cells());
+        setColorBackground(colorProvider.getNormalCellColor());
+        deselectCell();
+        boardPanel.validate();
+        rightPanel.add(viewFactory.createLostWhitePawn());
+        rightPanel.validate();
     }
 
 
@@ -121,7 +127,7 @@ public class Game {
     public void moveRequest(Pair<Int> coord) {
         possibleMoves = gameViewImpl.getPossibleMoves(coord);
         System.out.println(possibleMoves.size());
-        setColorBackground(new Color(41,71,79));
+        setColorBackground(colorProvider.getPossibleMovesColor());
     }
 
 
