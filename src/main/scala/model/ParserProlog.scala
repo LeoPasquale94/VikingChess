@@ -51,6 +51,11 @@ object ParserProlog {
     private var goal: SolveInfo = _
     private var list: Term = new Struct()
     private var myBoard: Board = _
+    private var playerToWin: Term = new Struct()
+    private var playerToMove: Term = new Struct()
+    private var board: Term = new Struct()
+    private var variant: Term = new Struct()
+
 
     engine.setTheory(new Theory(new FileInputStream(theory)))
 
@@ -58,6 +63,11 @@ object ParserProlog {
       goal = engine.solve("retractall(playerToMove(_)), retractall(winner(_)), retractall(board(_))," +
         s"newGame($newVariant,(V,P,W,B))," +
         "assert(variant(V)),assert(playerToMove(P)),assert(winner(W)),assert(board(B)).")
+
+      board = goal.getTerm("B")
+      variant = goal.getTerm("V")
+      playerToMove = goal.getTerm("P")
+      playerToWin = goal.getTerm("W")
 
       goalString = replaceBoardString(goal.getTerm("B"))
 
@@ -68,8 +78,11 @@ object ParserProlog {
 
     override def showPossibleCells(cell: Pair[Int]): ListBuffer[Pair[Int]] = {
 
+      /*goal = engine.solve(s"variant(V), playerToMove(P), winner(W), board(B)," +
+        s"getCoordPossibleMoves((V,P,W,B), coord(${cell.getX}, ${cell.getY}), L).")*/
+
       goal = engine.solve(s"variant(V), playerToMove(P), winner(W), board(B)," +
-        s"getCoordPossibleMoves((V,P,W,B), coord(${cell.getX + 1}, ${cell.getY + 1}), L).")
+        s"getCoordPossibleMoves(($variant,$playerToMove,$playerToWin,$board), coord(${cell.getX}, ${cell.getY}), L).")
       list = goal.getTerm("L")
 
       goalString = replaceListCellsString(list)
@@ -78,11 +91,20 @@ object ParserProlog {
     }
 
     override def makeMove(cellStart: Pair[Int], cellArrival: Pair[Int]): (Player.Value, Player.Value, Board, Int) = {
+      /*goal = engine.solve(s"variant(V), playerToMove(P), winner(W), board(B), " +
+        "makeLegitMove((V, P, W, B),coord(${cellStart.getX},${cellStart.getY}),coord(${cellArrival.getX},${cellArrival.getY}), L, (V2,P2,W2,B2))," +
+        "assert(variant(V2)), assert(playerToMove(P2)),assert(winner(W2)),assert(board(B2)).")*/
+
       goal = engine.solve(s"variant(V), playerToMove(P), winner(W), board(B), " +
-        s"makeLegitMove((V, P, W, B),coord(${cellStart.getX},${cellStart.getY}),coord(${cellArrival.getX},${cellArrival.getY}), L, (V2,P2,W2,B2))," +
+        s"makeLegitMove(($variant, $playerToMove, $playerToWin, $board),coord(${cellStart.getX},${cellStart.getY}),coord(${cellArrival.getX},${cellArrival.getY}), L, (V2,P2,W2,B2))," +
         "assert(variant(V2)), assert(playerToMove(P2)),assert(winner(W2)),assert(board(B2)).")
 
       goalString = replaceBoardString(goal.getTerm("B2"))
+
+      board = goal.getTerm("B2")
+      variant = goal.getTerm("V2")
+      playerToMove = goal.getTerm("P2")
+      playerToWin = goal.getTerm("W2")
 
       setModelBoard(goalString)
 

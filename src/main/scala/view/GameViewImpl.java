@@ -1,6 +1,10 @@
 package view;
 
 import controller.ControllerHnefatafl;
+import model.GameVariant;
+import scala.Int;
+import scala.Tuple3;
+import utils.Board.Board;
 import utils.Pair;
 
 import javax.swing.*;
@@ -8,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 public class GameViewImpl implements GameView, ActionListener {
@@ -17,10 +22,11 @@ public class GameViewImpl implements GameView, ActionListener {
     private HashMap<Pair, JButton> cells;
     private ScalaViewFactory viewFactory;
     public ControllerHnefatafl controller;
-    public ArrayList<Pair> possibleMoves;
+    public List<Pair<Int>> possibleMoves;
     private Optional<Pair> selectedCell = Optional.empty();
     private Menu menuUtils;
     private Game gameUtils;
+    private Board board;
 
     public GameViewImpl(ControllerHnefatafl controller){
         this.controller = controller;
@@ -43,8 +49,8 @@ public class GameViewImpl implements GameView, ActionListener {
         menuPanel = menuUtils.initMenu();
     }
 
-    private void initGamePanel() {
-        gamePanel = gameUtils.initGamePanel();
+    private void initGamePanel(Board board) {
+        gamePanel = gameUtils.initGamePanel(board);
     }
 
     public void initOrRestoreGUI(){
@@ -52,7 +58,9 @@ public class GameViewImpl implements GameView, ActionListener {
             gameUtils.restoreGame();
             overlayPanel.remove(gamePanel);
         }
-        initGamePanel();
+        board = controller.newGame(GameVariant.Hnefatafl());
+        dimension = (int) Math.sqrt(board.size());
+        initGamePanel(board);
         overlayPanel.add(gamePanel);
         showGame();
     }
@@ -73,8 +81,17 @@ public class GameViewImpl implements GameView, ActionListener {
         gamePanel.setVisible(false);
     }
 
-    public ArrayList<Pair> getPossibleMoves(Pair coord) {
-        return null;
+    public List<Pair<Int>> getPossibleMoves(Pair coord) {
+        System.out.println(coord.getX() + " " + coord.getY());
+        return controller.getPossibleMoves(coord);
+    }
+
+    public Tuple3 setMove(Pair coordinateStart, Pair coordinateArrival){
+        return controller.setMove(coordinateStart, coordinateArrival);
+    }
+
+    public int getDimension() {
+        return dimension;
     }
 
 

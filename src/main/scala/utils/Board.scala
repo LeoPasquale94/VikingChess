@@ -12,12 +12,12 @@ object Board {
     /**
       * Coordinate of the cell
       */
-    def coordinates: Pair[Int]
+    //def coordinates: Pair[Int]
 
     /**
       * Piece in the cell
       */
-    def piece: PieceType
+    //def piece: PieceType
 
     /**
       * Gets piece in the cell
@@ -36,9 +36,12 @@ object Board {
 
     case class BoardCellImpl(coordinateCell: Pair[Int], pieceCell: PieceType) extends BoardCell {
 
-      override def coordinates: Pair[Int] = coordinateCell
+      //override def coordinates: Pair[Int] = coordinateCell
 
-      override def piece: PieceType = pieceCell
+      //override def piece: PieceType = pieceCell
+      //private val coordinate: Pair[Int] = coordinateCell
+
+      //private val piece: PieceType = pieceCell
 
       override def getPiece: PieceType = pieceCell
 
