@@ -155,7 +155,7 @@ object ScalaView {
 
     private var cellDimension = 0;
     private var smallerSide = ScreenSize.getSmallerSide * 9 / 10
-    val f: Font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/Font/NorseBold-2Kge.otf"))
+    val f: Font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/font/NorseBold-2Kge.otf"))
     val ge: GraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment
     ge.registerFont(f)
 
@@ -239,14 +239,14 @@ object ScalaView {
 
     private class CenterCell(dimension: Int) extends SpecialCell(dimension){
 
-      private val iconCell = new ImageIcon(getClass.getResource("/resources/iconThrone.png"))
+      private val iconCell = new ImageIcon(getClass.getResource("/images/iconThrone.png"))
       setIcon(iconCell)
 
     }
 
     private class CornerCell(dimension: Int) extends SpecialCell(dimension){
 
-      private val iconCell = new ImageIcon(getClass.getResource("/resources/iconCellWin.png"))
+      private val iconCell = new ImageIcon(getClass.getResource("/images/iconCellWin.png"))
       setIcon(iconCell)
 
     }
@@ -271,11 +271,11 @@ object ScalaView {
 
       private val menuLabel = new JLabel()
 
-      private val image = ImageIO.read(new File(("src/Main/resources/resources/Cornice.png")))
+      private val image = ImageIO.read(new File(("src/Main/resources/images/Cornice.png")))
 
       private val imageScaled = image.getScaledInstance(smallerSide, smallerSide * 98/100, Image.SCALE_DEFAULT)
 
-      private val img = new ImageIcon(getClass.getResource("/resources/logo.png"))
+      private val img = new ImageIcon(getClass.getResource("/images/logo.png"))
 
       setLayout(new BoxLayout(this, BoxLayout.Y_AXIS))
       menuLabel.setPreferredSize(new Dimension(smallerSide, smallerSide * 25/ 100))
@@ -348,7 +348,7 @@ object ScalaView {
     }
 
     private class GameButton(s: String) extends EmptyButton(s) {
-      private var imageIcon = new ImageIcon(getClass.getResource("/resources/hamburgerMenu.png"))
+      private var imageIcon = new ImageIcon(getClass.getResource("/images/hamburgerMenu.png"))
       private var image = imageIcon.getImage
       image = image.getScaledInstance(smallerSide * 7/ 100, smallerSide * 7/100, Image.SCALE_SMOOTH)
       imageIcon = new ImageIcon(image)
@@ -446,7 +446,7 @@ object ScalaView {
 
     private class Frame extends JFrame {
       private val FRAME_TITLE = "Viking Chess - Hnefatafl"
-      private val iconApp = new ImageIcon(getClass.getResource("/resources/iconApp.png"))
+      private val iconApp = new ImageIcon(getClass.getResource("/images/iconApp.png"))
 
       setTitle(FRAME_TITLE)
       setIconImage(iconApp.getImage)
