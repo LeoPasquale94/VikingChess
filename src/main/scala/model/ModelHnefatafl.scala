@@ -97,7 +97,7 @@ object ModelHnefatafl {
 
       /*
       if(hasWon(game._2))
-        controller.isWinner(game._2)
+        controller.wonOrDraw(game._2)
       */
 
       println(game)

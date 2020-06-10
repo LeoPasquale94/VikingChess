@@ -38,7 +38,7 @@ trait ControllerHnefatafl {
   /**
     * Calls view for indicate the winner of the game.
     */
-  //def isWinner(winner: Player.Value): Unit
+  //def wonOrDraw(winner: Player.Value): Unit
 }
 
 object ControllerHnefatafl {
@@ -56,6 +56,6 @@ object ControllerHnefatafl {
 
     override def setMove(coordinateStart: Pair[Int],coordinateArrival: Pair[Int]): (Board, Int, Int) = modelGame.setMove(coordinateStart, coordinateArrival)
 
-    //override def isWinner(winner: Player.Value): Unit = viewGame.stopWithWinner(winner.toString)
+    //override def wonOrDraw(winner: Player.Value): Unit = viewGame.stopWithWinner(winner.toString)
   }
 }

@@ -14,13 +14,13 @@ boardSize(hnefatafl, 11).
 %%% (pieces = e: empty, bp: black pawn, wp: white pawn, wk: white king).
 % [initPieces(+Variant, -Board)]
 initBoard(
-		hnefatafl,
+	hnefatafl,
     [
         [ cell(coord(1,1),e),   cell(coord(1,2),e),   cell(coord(1,3),e),  cell(coord(1,4),bp),  cell(coord(1,5),bp),  cell(coord(1,6),bp),  cell(coord(1,7),bp),  cell(coord(1,8),bp),  cell(coord(1,9),e),  cell(coord(1,10),e),   cell(coord(1,11),e)  ],
-				[ cell(coord(2,1),e),   cell(coord(2,2),e),   cell(coord(2,3),e),  cell(coord(2,4),e),   cell(coord(2,5),e),   cell(coord(2,6),bp),  cell(coord(2,7),e),   cell(coord(2,8),e),   cell(coord(2,9),e),  cell(coord(2,10),e),   cell(coord(2,11),e)  ],
-				[ cell(coord(3,1),e),   cell(coord(3,2),e),   cell(coord(3,3),e),  cell(coord(3,4),e),   cell(coord(3,5),e),   cell(coord(3,6),e),   cell(coord(3,7),e),   cell(coord(3,8),e),   cell(coord(3,9),e),  cell(coord(3,10),e),   cell(coord(3,11),e)  ],
-				[ cell(coord(4,1),bp),  cell(coord(4,2),e),   cell(coord(4,3),e),  cell(coord(4,4),e),   cell(coord(4,5),e),   cell(coord(4,6),wp),  cell(coord(4,7),e),   cell(coord(4,8),e),   cell(coord(4,9),e),  cell(coord(4,10),e),   cell(coord(4,11),bp) ],
-				[ cell(coord(5,1),bp),  cell(coord(5,2),e),   cell(coord(5,3),e),  cell(coord(5,4),e),   cell(coord(5,5),wp),  cell(coord(5,6),wp),  cell(coord(5,7),wp),  cell(coord(5,8),e),   cell(coord(5,9),e),  cell(coord(5,10),e),   cell(coord(5,11),bp) ],
+		[ cell(coord(2,1),e),   cell(coord(2,2),e),   cell(coord(2,3),e),  cell(coord(2,4),e),   cell(coord(2,5),e),   cell(coord(2,6),bp),  cell(coord(2,7),e),   cell(coord(2,8),e),   cell(coord(2,9),e),  cell(coord(2,10),e),   cell(coord(2,11),e)  ],
+		[ cell(coord(3,1),e),   cell(coord(3,2),e),   cell(coord(3,3),e),  cell(coord(3,4),e),   cell(coord(3,5),e),   cell(coord(3,6),e),   cell(coord(3,7),e),   cell(coord(3,8),e),   cell(coord(3,9),e),  cell(coord(3,10),e),   cell(coord(3,11),e)  ],
+		[ cell(coord(4,1),bp),  cell(coord(4,2),e),   cell(coord(4,3),e),  cell(coord(4,4),e),   cell(coord(4,5),e),   cell(coord(4,6),wp),  cell(coord(4,7),e),   cell(coord(4,8),e),   cell(coord(4,9),e),  cell(coord(4,10),e),   cell(coord(4,11),bp) ],
+		[ cell(coord(5,1),bp),  cell(coord(5,2),e),   cell(coord(5,3),e),  cell(coord(5,4),e),   cell(coord(5,5),wp),  cell(coord(5,6),wp),  cell(coord(5,7),wp),  cell(coord(5,8),e),   cell(coord(5,9),e),  cell(coord(5,10),e),   cell(coord(5,11),bp) ],
         [ cell(coord(6,1),bp),  cell(coord(6,2),bp),  cell(coord(6,3),e),  cell(coord(6,4),wp),  cell(coord(6,5),wp),  cell(coord(6,6),wk),  cell(coord(6,7),wp),  cell(coord(6,8),wp),  cell(coord(6,9),e),  cell(coord(6,10),bp),  cell(coord(6,11),bp) ],
         [ cell(coord(7,1),bp),  cell(coord(7,2),e),   cell(coord(7,3),e),  cell(coord(7,4),e),   cell(coord(7,5),wp),  cell(coord(7,6),wp),  cell(coord(7,7),wp),  cell(coord(7,8),e),   cell(coord(7,9),e),  cell(coord(7,10),e),   cell(coord(7,11),bp) ],
         [ cell(coord(8,1),bp),  cell(coord(8,2),e),   cell(coord(8,3),e),  cell(coord(8,4),e),   cell(coord(8,5),e),   cell(coord(8,6),wp),  cell(coord(8,7),e),   cell(coord(8,8),e),   cell(coord(8,9),e),  cell(coord(8,10),e),   cell(coord(8,11),bp) ],
@@ -32,13 +32,13 @@ initBoard(
 
 boardSize(tawlbwrdd, 11).
 initBoard(
-		tawlbwrdd,
+	tawlbwrdd,
     [
         [ cell(coord(1,1),e),   cell(coord(1,2),e),   cell(coord(1,3),e),  cell(coord(1,4),e),   cell(coord(1,5),bp),  cell(coord(1,6),bp),  cell(coord(1,7),bp),  cell(coord(1,8),e),   cell(coord(1,9),e),  cell(coord(1,10),e),   cell(coord(1,11),e)  ],
-				[ cell(coord(2,1),e),   cell(coord(2,2),e),   cell(coord(2,3),e),  cell(coord(2,4),e),   cell(coord(2,5),bp),  cell(coord(2,6),e),   cell(coord(2,7),bp),  cell(coord(2,8),e),   cell(coord(2,9),e),  cell(coord(2,10),e),   cell(coord(2,11),e)  ],
-				[ cell(coord(3,1),e),   cell(coord(3,2),e),   cell(coord(3,3),e),  cell(coord(3,4),e),   cell(coord(3,5),e),   cell(coord(3,6),bp),  cell(coord(3,7),e),   cell(coord(3,8),e),   cell(coord(3,9),e),  cell(coord(3,10),e),   cell(coord(3,11),e)  ],
-				[ cell(coord(4,1),e),   cell(coord(4,2),e),   cell(coord(4,3),e),  cell(coord(4,4),e),   cell(coord(4,5),e),   cell(coord(4,6),wp),  cell(coord(4,7),e),   cell(coord(4,8),e),   cell(coord(4,9),e),  cell(coord(4,10),e),   cell(coord(4,11),e)  ],
-				[ cell(coord(5,1),bp),  cell(coord(5,2),bp),  cell(coord(5,3),e),  cell(coord(5,4),e),   cell(coord(5,5),wp),  cell(coord(5,6),wp),  cell(coord(5,7),wp),  cell(coord(5,8),e),   cell(coord(5,9),e),  cell(coord(5,10),bp),  cell(coord(5,11),bp) ],
+		[ cell(coord(2,1),e),   cell(coord(2,2),e),   cell(coord(2,3),e),  cell(coord(2,4),e),   cell(coord(2,5),bp),  cell(coord(2,6),e),   cell(coord(2,7),bp),  cell(coord(2,8),e),   cell(coord(2,9),e),  cell(coord(2,10),e),   cell(coord(2,11),e)  ],
+		[ cell(coord(3,1),e),   cell(coord(3,2),e),   cell(coord(3,3),e),  cell(coord(3,4),e),   cell(coord(3,5),e),   cell(coord(3,6),bp),  cell(coord(3,7),e),   cell(coord(3,8),e),   cell(coord(3,9),e),  cell(coord(3,10),e),   cell(coord(3,11),e)  ],
+        [ cell(coord(4,1),e),   cell(coord(4,2),e),   cell(coord(4,3),e),  cell(coord(4,4),e),   cell(coord(4,5),e),   cell(coord(4,6),wp),  cell(coord(4,7),e),   cell(coord(4,8),e),   cell(coord(4,9),e),  cell(coord(4,10),e),   cell(coord(4,11),e)  ],
+        [ cell(coord(5,1),bp),  cell(coord(5,2),bp),  cell(coord(5,3),e),  cell(coord(5,4),e),   cell(coord(5,5),wp),  cell(coord(5,6),wp),  cell(coord(5,7),wp),  cell(coord(5,8),e),   cell(coord(5,9),e),  cell(coord(5,10),bp),  cell(coord(5,11),bp) ],
         [ cell(coord(6,1),bp),  cell(coord(6,2),e),   cell(coord(6,3),bp), cell(coord(6,4),wp),  cell(coord(6,5),wp),  cell(coord(6,6),wk),  cell(coord(6,7),wp),  cell(coord(6,8),wp),  cell(coord(6,9),bp), cell(coord(6,10),e),   cell(coord(6,11),bp) ],
         [ cell(coord(7,1),bp),  cell(coord(7,2),bp),  cell(coord(7,3),e),  cell(coord(7,4),e),   cell(coord(7,5),wp),  cell(coord(7,6),wp),  cell(coord(7,7),wp),  cell(coord(7,8),e),   cell(coord(7,9),e),  cell(coord(7,10),bp),  cell(coord(7,11),bp) ],
         [ cell(coord(8,1),e),   cell(coord(8,2),e),   cell(coord(8,3),e),  cell(coord(8,4),e),   cell(coord(8,5),e),   cell(coord(8,6),wp),  cell(coord(8,7),e),   cell(coord(8,8),e),   cell(coord(8,9),e),  cell(coord(8,10),e),   cell(coord(8,11),e)  ],
@@ -50,13 +50,13 @@ initBoard(
 
 boardSize(tablut, 9).
 initBoard(
-		tablut,
+    tablut,
     [
         [ cell(coord(1,1),e),   cell(coord(1,2),e),   cell(coord(1,3),e),  cell(coord(1,4),bp),  cell(coord(1,5),bp),  cell(coord(1,6),bp),  cell(coord(1,7),e),   cell(coord(1,8),e),   cell(coord(1,9),e)  ],
-				[ cell(coord(2,1),e),   cell(coord(2,2),e),   cell(coord(2,3),e),  cell(coord(2,4),e),   cell(coord(2,5),bp),  cell(coord(2,6),e),   cell(coord(2,7),e),   cell(coord(2,8),e),   cell(coord(2,9),e)  ],
-				[ cell(coord(3,1),e),   cell(coord(3,2),e),   cell(coord(3,3),e),  cell(coord(3,4),e),   cell(coord(3,5),wp),  cell(coord(3,6),e),   cell(coord(3,7),e),   cell(coord(3,8),e),   cell(coord(3,9),e)  ],
-				[ cell(coord(4,1),bp),  cell(coord(4,2),e),   cell(coord(4,3),e),  cell(coord(4,4),e),   cell(coord(4,5),wp),  cell(coord(4,6),e),   cell(coord(4,7),e),   cell(coord(4,8),e),   cell(coord(4,9),bp) ],
-				[ cell(coord(5,1),bp),  cell(coord(5,2),bp),  cell(coord(5,3),wp), cell(coord(5,4),wp),  cell(coord(5,5),wk),  cell(coord(5,6),wp),  cell(coord(5,7),wp),  cell(coord(5,8),bp),  cell(coord(5,9),bp) ],
+        [ cell(coord(2,1),e),   cell(coord(2,2),e),   cell(coord(2,3),e),  cell(coord(2,4),e),   cell(coord(2,5),bp),  cell(coord(2,6),e),   cell(coord(2,7),e),   cell(coord(2,8),e),   cell(coord(2,9),e)  ],
+        [ cell(coord(3,1),e),   cell(coord(3,2),e),   cell(coord(3,3),e),  cell(coord(3,4),e),   cell(coord(3,5),wp),  cell(coord(3,6),e),   cell(coord(3,7),e),   cell(coord(3,8),e),   cell(coord(3,9),e)  ],
+        [ cell(coord(4,1),bp),  cell(coord(4,2),e),   cell(coord(4,3),e),  cell(coord(4,4),e),   cell(coord(4,5),wp),  cell(coord(4,6),e),   cell(coord(4,7),e),   cell(coord(4,8),e),   cell(coord(4,9),bp) ],
+        [ cell(coord(5,1),bp),  cell(coord(5,2),bp),  cell(coord(5,3),wp), cell(coord(5,4),wp),  cell(coord(5,5),wk),  cell(coord(5,6),wp),  cell(coord(5,7),wp),  cell(coord(5,8),bp),  cell(coord(5,9),bp) ],
         [ cell(coord(6,1),bp),  cell(coord(6,2),e),   cell(coord(6,3),e),  cell(coord(6,4),e),   cell(coord(6,5),wp),  cell(coord(6,6),e),   cell(coord(6,7),e),   cell(coord(6,8),e),   cell(coord(6,9),bp) ],
         [ cell(coord(7,1),e),   cell(coord(7,2),e),   cell(coord(7,3),e),  cell(coord(7,4),e),   cell(coord(7,5),wp),  cell(coord(7,6),e),   cell(coord(7,7),e),   cell(coord(7,8),e),   cell(coord(7,9),e)  ],
         [ cell(coord(8,1),e),   cell(coord(8,2),e),   cell(coord(8,3),e),  cell(coord(8,4),e),   cell(coord(8,5),bp),  cell(coord(8,6),e),   cell(coord(8,7),e),   cell(coord(8,8),e),   cell(coord(8,9),e)  ],
@@ -67,13 +67,13 @@ initBoard(
 
 boardSize(brandubh, 7).
 initBoard(
-		brandubh,
+    brandubh,
     [
         [ cell(coord(1,1),e),   cell(coord(1,2),e),   cell(coord(1,3),e),  cell(coord(1,4),bp),  cell(coord(1,5),e),   cell(coord(1,6),e),   cell(coord(1,7),e)  ],
-				[ cell(coord(2,1),e),   cell(coord(2,2),e),   cell(coord(2,3),e),  cell(coord(2,4),bp),  cell(coord(2,5),e),   cell(coord(2,6),e),   cell(coord(2,7),e)  ],
-				[ cell(coord(3,1),e),   cell(coord(3,2),e),   cell(coord(3,3),e),  cell(coord(3,4),wp),  cell(coord(3,5),e),   cell(coord(3,6),e),   cell(coord(3,7),e)  ],
-				[ cell(coord(4,1),bp),  cell(coord(4,2),bp),  cell(coord(4,3),wp), cell(coord(4,4),wk),  cell(coord(4,5),wp),  cell(coord(4,6),bp),  cell(coord(4,7),bp) ],
-				[ cell(coord(5,1),e),   cell(coord(5,2),e),   cell(coord(5,3),e),  cell(coord(5,4),wp),  cell(coord(5,5),e),   cell(coord(5,6),e),   cell(coord(5,7),e)  ],
+        [ cell(coord(2,1),e),   cell(coord(2,2),e),   cell(coord(2,3),e),  cell(coord(2,4),bp),  cell(coord(2,5),e),   cell(coord(2,6),e),   cell(coord(2,7),e)  ],
+        [ cell(coord(3,1),e),   cell(coord(3,2),e),   cell(coord(3,3),e),  cell(coord(3,4),wp),  cell(coord(3,5),e),   cell(coord(3,6),e),   cell(coord(3,7),e)  ],
+        [ cell(coord(4,1),bp),  cell(coord(4,2),bp),  cell(coord(4,3),wp), cell(coord(4,4),wk),  cell(coord(4,5),wp),  cell(coord(4,6),bp),  cell(coord(4,7),bp) ],
+        [ cell(coord(5,1),e),   cell(coord(5,2),e),   cell(coord(5,3),e),  cell(coord(5,4),wp),  cell(coord(5,5),e),   cell(coord(5,6),e),   cell(coord(5,7),e)  ],
         [ cell(coord(6,1),e),   cell(coord(6,2),e),   cell(coord(6,3),e),  cell(coord(6,4),bp),  cell(coord(6,5),e),   cell(coord(6,6),e),   cell(coord(6,7),e)  ],
         [ cell(coord(7,1),e),   cell(coord(7,2),e),   cell(coord(7,3),e),  cell(coord(7,4),bp),  cell(coord(7,5),e),   cell(coord(7,6),e),   cell(coord(7,7),e)  ]      
     ]
