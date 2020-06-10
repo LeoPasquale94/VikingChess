@@ -5,31 +5,33 @@ import java.awt.Color
 trait ColorProvider {
 
 
-  def getBlackColor:Color
+  def getBlackColor: Color
 
-  def getHighlightColor:Color
+  def getHighlightColor: Color
 
-  def getSpecialCellColor:Color
+  def getSpecialCellColor: Color
 
-  def getPawnCellColor:Color
+  def getPawnCellColor: Color
 
-  def getNormalCellColor:Color
+  def getNormalCellColor: Color
 
-  def getLightBrown:Color
+  def getPossibleMovesColor: Color
 
-  def getMenuButtonColor:Color
+  def getLightBrownColor: Color
 
-  def getWhiteColor:Color
+  def getBrownColor: Color
 
-  def getGoldColor:Color
+  def getWhiteColor: Color
+
+  def getGoldColor: Color
 
 }
 
 object ColorProvider{
 
-  class ColorProviderImpl extends ColorProvider{
+  class ColorProviderImpl() extends ColorProvider{
 
-    override def getBlackColor: Color = new Color(47, 53, 59)
+    override def getBlackColor: Color = Color.BLACK
 
     override def getHighlightColor: Color = Color.LIGHT_GRAY
 
@@ -39,9 +41,11 @@ object ColorProvider{
 
     override def getNormalCellColor: Color = new Color(83, 143, 159)
 
-    override def getLightBrown: Color = new Color(200, 170, 109)
+    override def getPossibleMovesColor: Color = new Color(41, 71, 79)
 
-    override def getMenuButtonColor: Color = new Color(255, 250, 240)
+    override def getLightBrownColor: Color = new Color(200, 170, 109)
+
+    override def getBrownColor: Color = new Color(114, 73, 51)
 
     override def getWhiteColor: Color = new Color(255, 250, 240)
 

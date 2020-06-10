@@ -8,6 +8,7 @@ import utils.ScreenSize
 import javax.imageio.ImageIO
 import javax.swing.border.LineBorder
 import javax.swing.{Box, BoxLayout, ImageIcon, JButton, JFrame, JLabel, JMenuItem, JPanel, JPopupMenu, OverlayLayout, SwingConstants}
+import view.ColorProvider.ColorProviderImpl
 
 trait ScalaViewFactory {
 
@@ -153,6 +154,7 @@ object ScalaView {
 
   case class ScalaViewImpl() extends ScalaViewFactory {
 
+    private var colorProvider = new ColorProviderImpl
     private var cellDimension = 0;
     private var smallerSide = ScreenSize.getSmallerSide * 9 / 10
     val f: Font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/font/NorseBold-2Kge.otf"))
@@ -231,7 +233,7 @@ object ScalaView {
 
     private class SpecialCell(dimension: Int) extends Cell(dimension) {
 
-      private val colorCellWin = new Color(46, 50, 100)
+      private val colorCellWin = colorProvider.getSpecialCellColor
       colorCell = colorCellWin
       setBackground(colorCellWin)
 
@@ -252,19 +254,19 @@ object ScalaView {
     }
 
     private class PawnCell(dimension: Int) extends Cell(dimension) {
-      private val colorCellPawn = new Color(153, 203, 205)
+      private val colorCellPawn = colorProvider.getPawnCellColor
       colorCell = colorCellPawn
       setBackground(colorCellPawn)
     }
 
     private class NormalCell(dimension: Int) extends Cell(dimension) {
-      private val colorNormalCell = new Color(83, 143, 159)
+      private val colorNormalCell = colorProvider.getNormalCellColor
       colorCell = colorNormalCell
       setBackground(colorNormalCell)
     }
 
     private class BoardPanel() extends JPanel {
-      this.setBackground(new Color(200, 170, 109))
+      this.setBackground(colorProvider.getLightBrownColor)
     }
 
     private class MenuPanel extends JPanel {
@@ -295,7 +297,7 @@ object ScalaView {
       private val WIDTH_DIMENSION = smallerSide
       private val HEIGHT_DIMENSION = smallerSide * 8 / 100
 
-      setBackground( new Color(200, 170, 109))
+      setBackground(colorProvider.getLightBrownColor)
       setPreferredSize(new Dimension(WIDTH_DIMENSION, HEIGHT_DIMENSION))
       setAlignmentX(Component.RIGHT_ALIGNMENT)
 
@@ -304,7 +306,7 @@ object ScalaView {
     private class LeftRightPanel(val columns: Int, val rows: Int) extends JPanel {
       private val WIDTH_DIMENSION = smallerSide * 10 / 100
       private val HEIGHT_DIMENSION = smallerSide * 80 / 100
-      private val colorSide = new Color(200, 170, 109)
+      private val colorSide = colorProvider.getLightBrownColor
       setLayout(new GridLayout(rows, columns))
       setBackground(colorSide)
       setPreferredSize(new Dimension(WIDTH_DIMENSION, HEIGHT_DIMENSION))
@@ -316,7 +318,7 @@ object ScalaView {
     }
 
     private class GamePanel extends JPanel {
-      setBackground(new Color(200, 170, 109))
+      setBackground(colorProvider.getLightBrownColor)
     }
 
     private class BoardPlusColumns extends JPanel {
@@ -343,7 +345,7 @@ object ScalaView {
       setBorderPainted(false);
 
       setFont(new Font(f.getFontName, Font.BOLD, FONT_DIMENSION))
-      setForeground(new Color(255, 250, 240))
+      setForeground(colorProvider.getWhiteColor)
       setBorderPainted(false)
     }
 
@@ -369,7 +371,7 @@ object ScalaView {
 
     private class MenuItem(text: String) extends JMenuItem {
 
-      private val colorSide = new Color(114, 73, 51)
+      private val colorSide = colorProvider.getBrownColor
       private val FONT_DIMENSION = smallerSide * 3 / 100
 
       setText(text)
@@ -408,24 +410,24 @@ object ScalaView {
     }
 
     private class WhitePawn extends Pawn {
-      private val white = new Color(255, 250, 240)
-      private val black = new Color(47, 53, 59)
+      private val white = colorProvider.getWhiteColor
+      private val black = colorProvider.getBlackColor
       namePawn = "white"
       externalColor = black
       internalColor = white
     }
 
     private class BlackPawn extends Pawn {
-      private val white = new Color(255, 250, 240)
-      private val black = new Color(47, 53, 59)
+      private val white = colorProvider.getWhiteColor
+      private val black = colorProvider.getBlackColor
       namePawn = "black"
       externalColor = white
       internalColor = black
     }
 
     private class KingPawn extends Pawn {
-      private val gold = new Color(212, 175, 55)
-      private val white = new Color(255, 250, 240)
+      private val gold = colorProvider.getGoldColor
+      private val white = colorProvider.getWhiteColor
       namePawn = "king"
       externalColor = gold
       internalColor = white
