@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 public class Game {
 
     GameViewImpl gameViewImpl;
@@ -97,14 +98,12 @@ public class Game {
             Tuple3 tuple = gameViewImpl.setMove(coordinateStart, coordinateArrival);
             Board board = (Board) tuple._1();
             System.out.println(board);
-            new Thread(() -> {
-                    setPawns(board.cells());
-                    setColorBackground(new Color(83, 143, 159));
-                    deselectCell();
-                    boardPanel.validate();
-                    rightPanel.add(viewFactory.createLostWhitePawn());
-                    rightPanel.validate();
-            }).start();
+            setPawns(board.cells());
+            setColorBackground(new Color(83, 143, 159));
+            deselectCell();
+            boardPanel.validate();
+            rightPanel.add(viewFactory.createLostWhitePawn());
+            rightPanel.validate();
         }
     }
 
