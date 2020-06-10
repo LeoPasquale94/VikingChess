@@ -107,6 +107,7 @@ public class Game {
         }
     }
 
+
     private Pair getCoordinate(JButton cell) {
         Pair<Int> cord= null;
         for(Map.Entry<Pair<Int>,JButton> entry : cells.entrySet()){
@@ -117,17 +118,20 @@ public class Game {
         return cord;
     }
 
+
     public void moveRequest(Pair<Int> coord) {
         possibleMoves = gameViewImpl.getPossibleMoves(coord);
         System.out.println(possibleMoves.size());
         setColorBackground(new Color(41,71,79));
     }
 
+
     public void setColorBackground(Color color){
         possibleMoves.forEach((c -> {
             cells.get(c).setBackground(color);
         }));
     }
+
 
     public void deselectCell(){
         selectedCell = Optional.empty();
