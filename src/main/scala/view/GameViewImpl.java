@@ -1,7 +1,7 @@
 package view;
 
-import Controller.TryController;
-import utils.Coordinate;
+import controller.ControllerHnefatafl;
+import utils.Pair;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,15 +14,15 @@ public class GameViewImpl implements GameView, ActionListener {
     public int dimension;
     private JFrame frame;
     private JPanel overlayPanel,gamePanel, menuPanel;
-    private HashMap<Coordinate, JButton> cells;
+    private HashMap<Pair, JButton> cells;
     private ScalaViewFactory viewFactory;
-    public TryController controller;
-    public ArrayList<Coordinate> possibleMoves;
-    private Optional<Coordinate> selectedCell = Optional.empty();
+    public ControllerHnefatafl controller;
+    public ArrayList<Pair> possibleMoves;
+    private Optional<Pair> selectedCell = Optional.empty();
     private Menu menuUtils;
     private Game gameUtils;
 
-    public GameViewImpl(TryController controller){
+    public GameViewImpl(ControllerHnefatafl controller){
         this.controller = controller;
         dimension = 11;
         cells = new HashMap<>();
@@ -73,13 +73,13 @@ public class GameViewImpl implements GameView, ActionListener {
         gamePanel.setVisible(false);
     }
 
-    public ArrayList<Coordinate> getPossibleMoves(Coordinate coord) {
-        return controller.getPossibleMoves(coord);
+    public ArrayList<Pair> getPossibleMoves(Pair coord) {
+        return null;
     }
 
 
     @Override
-    public void update(ArrayList<Coordinate> list) {
+    public void update(ArrayList<Pair> list) {
         list.forEach(coord -> {
             cells.get(coord).add(viewFactory.createBlackPawn());
         });

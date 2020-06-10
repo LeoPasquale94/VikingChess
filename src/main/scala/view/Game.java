@@ -1,6 +1,7 @@
 package view;
 
-import utils.Coordinate;
+import utils.Pair;
+import utils.Pair.PairImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,15 +12,14 @@ import java.util.Optional;
 
 public class Game {
 
-    ScalaViewFactory scalaViewFactory;
     GameViewImpl gameViewImpl;
 
     public JPanel gamePanel,northPanel,southPanel,boardPanel,boardPlusColumns, leftPanel, rightPanel;
     private JButton menuButton;
-    private HashMap<Coordinate, JButton> cells;
+    private HashMap<Pair<Integer>, JButton> cells;
     private ScalaViewFactory viewFactory;
-    private ArrayList<Coordinate> possibleMoves;
-    private Optional<Coordinate> selectedCell = Optional.empty();
+    private ArrayList<Pair> possibleMoves;
+    private Optional<Pair> selectedCell = Optional.empty();
 
 
 
@@ -63,7 +63,7 @@ public class Game {
         GridBagConstraints lim = new GridBagConstraints();
         for (int i = 1; i <= gameViewImpl.dimension; i++) {
             for (int j = 1; j<= gameViewImpl.dimension; j++) {
-                Coordinate coordinate = new Coordinate(i,j);
+                Pair<Integer> coordinate = new PairImpl(i,j);
                 JButton cell= cellChoice(coordinate);
                 cell.addActionListener(e -> actionCell(cell));
                 lim.gridx=j;
@@ -100,9 +100,9 @@ public class Game {
         }
     }
 
-    private Coordinate getCoordinate(JButton cell) {
-        Coordinate cord= null;
-        for(Map.Entry<Coordinate,JButton> entry : cells.entrySet()){
+    private Pair getCoordinate(JButton cell) {
+        Pair<Integer> cord= null;
+        for(Map.Entry<Pair<Integer>,JButton> entry : cells.entrySet()){
             if(entry.getValue().equals(cell)){
                 cord= entry.getKey();
             }
@@ -110,7 +110,7 @@ public class Game {
         return cord;
     }
 
-    public void moveRequest(Coordinate coord) {
+    public void moveRequest(Pair<Integer> coord) {
         possibleMoves = gameViewImpl.getPossibleMoves(coord);
         setColorBackground(new Color(41,71,79));
     }
@@ -128,8 +128,13 @@ public class Game {
 
 
     private void initPawns(){
-        ArrayList<Coordinate> initPositions = gameViewImpl.controller.initPositions();
+        ArrayList<Pair<Integer>> initPositions = null; //gameViewImpl.controller.initPositions();
+
+
+        // DA RIMUOVERE
         System.out.println(cells);
+
+
         initPositions.forEach(p ->{
             cells.get(p).add(viewFactory.createBlackPawn());
         });
@@ -156,7 +161,7 @@ public class Game {
         southPanel=viewFactory.createTopBottomPanel();
     }
 
-    private JButton cellChoice(Coordinate c){
+    private JButton cellChoice(Pair c){
         if(isCornerCell(c)) {
             return viewFactory.createCornerCell(gameViewImpl.dimension);
         }
@@ -178,14 +183,14 @@ public class Game {
         gamePanel.removeAll();
     }
 
-    private boolean isCornerCell(Coordinate c) {
+    private boolean isCornerCell(Pair<Integer> c) {
         return c.getX() == 1 && c.getY() == 1 ||
                 c.getX() == 1 && c.getY() == gameViewImpl.dimension ||
                 c.getX() == gameViewImpl.dimension && c.getY() == 1 ||
                 c.getX() == gameViewImpl.dimension && c.getY() == gameViewImpl.dimension;
     }
 
-    private boolean isCenterCell(Coordinate c) {
-        return c.getX() == gameViewImpl.dimension/2 +1  && c.getY() == gameViewImpl.dimension/2 +1;
+    private boolean isCenterCell(Pair<Integer> c) {
+        return c.getX() == gameViewImpl.dimension/2 + 1  && c.getY() == gameViewImpl.dimension/2 + 1;
     }
 }
