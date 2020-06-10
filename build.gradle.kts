@@ -18,7 +18,8 @@ dependencies {
     implementation("org.scala-lang:scala-library:2.12.8")
     implementation("it.unibo.alice.tuprolog:tuprolog:3.1")
     implementation(kotlin("stdlib-jdk8"))
-    testCompile("com.novocode:junit-interface:0.11")
+    testCompile("org.scalacheck:scalacheck_2.11:1.12.5")
+    testCompile("com.novocode", "junit-interface", "0.11")
     testCompile("org.scalamock:scalamock-scalatest-support_2.8.1:2.1")
     testCompile("org.scalatest:scalatest_2.11:3.0.5")
 }
