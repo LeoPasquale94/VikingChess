@@ -100,6 +100,8 @@ object ModelHnefatafl {
         controller.isWinner(game._2)
       */
 
+      println(game)
+
       (game._3, numberBlackCaptured, numberWhiteCaptured)
     }
 

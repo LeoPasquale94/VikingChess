@@ -1,5 +1,11 @@
 package view;
 
+import model.PieceEnum;
+import scala.Enumeration;
+import scala.Int;
+import scala.Tuple3;
+import utils.Board.Board;
+import utils.Board.BoardCell;
 import utils.Pair;
 import utils.Pair.PairImpl;
 
@@ -7,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,10 +23,11 @@ public class Game {
 
     public JPanel gamePanel,northPanel,southPanel,boardPanel,boardPlusColumns, leftPanel, rightPanel;
     private JButton menuButton;
-    private HashMap<Pair<Integer>, JButton> cells;
+    private HashMap<Pair<Int>, JButton> cells;
     private ScalaViewFactory viewFactory;
-    private ArrayList<Pair> possibleMoves;
+    private List<Pair<Int>> possibleMoves;
     private Optional<Pair> selectedCell = Optional.empty();
+    private Board board;
 
 
 
@@ -31,13 +39,14 @@ public class Game {
 
     }
 
-    public JPanel initGamePanel(){
+    public JPanel initGamePanel(Board board){
+        this.board = board;
         gamePanel = viewFactory.createGamePanel();
         initNorthPanel();
         initSouthPanel();
         initLeftRightPanel();
         initBoard();
-        initPawns();
+        setPawns(board.cells());
 
         gamePanel.add(northPanel);
 
@@ -61,9 +70,9 @@ public class Game {
         GridBagLayout layout = new GridBagLayout();
         boardPanel.setLayout(layout);
         GridBagConstraints lim = new GridBagConstraints();
-        for (int i = 1; i <= gameViewImpl.dimension; i++) {
-            for (int j = 1; j<= gameViewImpl.dimension; j++) {
-                Pair<Integer> coordinate = new PairImpl(i,j);
+        for (int i = 1; i <= gameViewImpl.getDimension(); i++) {
+            for (int j = 1; j<= gameViewImpl.getDimension(); j++) {
+                Pair<Int> coordinate = new PairImpl(i,j);
                 JButton cell= cellChoice(coordinate);
                 cell.addActionListener(e -> actionCell(cell));
                 lim.gridx=j;
@@ -76,33 +85,32 @@ public class Game {
     };
 
     public void actionCell(JButton cell) {
-
         if(cell.getComponents().length > 0 && possibleMoves.isEmpty()){
-            cells.forEach((k, v) -> {
-                if(v.equals(cell))
-                    selectedCell=Optional.of(getCoordinate(cell));
-                moveRequest(k);
-            });
+            selectedCell = Optional.of(getCoordinate(cell));
+            moveRequest(getCoordinate(cell));
         } else if(!possibleMoves.isEmpty() &&  !possibleMoves.contains(getCoordinate(cell))) {
             setColorBackground( new Color(83, 143, 159));
             deselectCell();
-
         }else if(possibleMoves.contains(getCoordinate(cell)) && selectedCell.isPresent()){
-            JButton destinationCell = cells.get(selectedCell.get());
-            cell.add(destinationCell.getComponent(0));
-            destinationCell.removeAll();
-            setColorBackground(new Color(83, 143, 159));
-            destinationCell.repaint();
-            deselectCell();
-            rightPanel.add(viewFactory.createLostWhitePawn());
-            rightPanel.validate();
-
+            Pair<Int> coordinateStart = selectedCell.get();
+            Pair<Int> coordinateArrival = getCoordinate(cell);
+            Tuple3 tuple = gameViewImpl.setMove(coordinateStart, coordinateArrival);
+            Board board = (Board) tuple._1();
+            System.out.println(board);
+            new Thread(() -> {
+                    setPawns(board.cells());
+                    setColorBackground(new Color(83, 143, 159));
+                    deselectCell();
+                    boardPanel.validate();
+                    rightPanel.add(viewFactory.createLostWhitePawn());
+                    rightPanel.validate();
+            }).start();
         }
     }
 
     private Pair getCoordinate(JButton cell) {
-        Pair<Integer> cord= null;
-        for(Map.Entry<Pair<Integer>,JButton> entry : cells.entrySet()){
+        Pair<Int> cord= null;
+        for(Map.Entry<Pair<Int>,JButton> entry : cells.entrySet()){
             if(entry.getValue().equals(cell)){
                 cord= entry.getKey();
             }
@@ -110,8 +118,9 @@ public class Game {
         return cord;
     }
 
-    public void moveRequest(Pair<Integer> coord) {
+    public void moveRequest(Pair<Int> coord) {
         possibleMoves = gameViewImpl.getPossibleMoves(coord);
+        System.out.println(possibleMoves.size());
         setColorBackground(new Color(41,71,79));
     }
 
@@ -122,23 +131,33 @@ public class Game {
     }
 
     public void deselectCell(){
-        selectedCell =Optional.empty();
+        selectedCell = Optional.empty();
         possibleMoves.clear();
     }
 
 
-    private void initPawns(){
-        ArrayList<Pair<Integer>> initPositions = null; //gameViewImpl.controller.initPositions();
-
-
-        // DA RIMUOVERE
-        System.out.println(cells);
-
-
-        initPositions.forEach(p ->{
-            cells.get(p).add(viewFactory.createBlackPawn());
+    private void setPawns(List<BoardCell> positions) {
+        positions.forEach(p -> {
+            cells.get(p.getCoordinate()).removeAll();
+            pawnChoice(p);
+            cells.get(p.getCoordinate()).repaint();
         });
     }
+
+
+    private void pawnChoice(BoardCell c) {
+        Enumeration.Value piece = c.getPiece();
+        if(piece.equals(PieceEnum.WhitePawn())){
+            cells.get(c.getCoordinate()).add(viewFactory.createWhitePawn());
+        }
+        else if(piece.equals(PieceEnum.BlackPawn())) {
+            cells.get(c.getCoordinate()).add(viewFactory.createBlackPawn());
+        }
+        else if(piece.equals(PieceEnum.WhiteKing())) {
+            cells.get(c.getCoordinate()).add(viewFactory.createKingPawn());
+        }
+    }
+
 
     private void initNorthPanel(){
         northPanel=viewFactory.createTopBottomPanel();
