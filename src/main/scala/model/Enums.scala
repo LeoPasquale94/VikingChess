@@ -15,6 +15,7 @@ object Player extends Enumeration {
   val White: Player.Value = Value("White")
   val Black: Player.Value = Value("Black")
   val None: Player.Value = Value("None")
+  val Draw: Player.Value = Value("Draw")
 }
 
 /**
