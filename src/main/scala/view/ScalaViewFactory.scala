@@ -155,7 +155,7 @@ object ScalaView {
 
     private var cellDimension = 0;
     private var smallerSide = ScreenSize.getSmallerSide * 9 / 10
-    val f: Font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/resources/Font/NorseBold-2Kge.otf"))
+    val f: Font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/Font/NorseBold-2Kge.otf"))
     val ge: GraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment
     ge.registerFont(f)
 
