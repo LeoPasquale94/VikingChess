@@ -1,8 +1,10 @@
 import alice.tuprolog.{Prolog, SolveInfo, Theory}
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FunSuite, Matchers}
 
-abstract class BoardTests extends FunSuite with Matchers {
-
+@RunWith(classOf[JUnitRunner])
+class BoardTests extends FunSuite {
   val prolog: Prolog = new Prolog()
   val theory: Theory = new Theory("src/main/scala/model/gameRulesListOfList.pl")
   var goal: SolveInfo = _
