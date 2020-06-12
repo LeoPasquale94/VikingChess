@@ -18,13 +18,13 @@ import java.util.Optional;
 public class GameViewImpl implements GameView, ActionListener {
     public int dimension;
     private JFrame frame;
-    private JPanel overlayPanel,gamePanel, menuPanel;
+    public JPanel overlayPanel,gamePanel, menuPanel, variantsPanel, diffPanel, playerChoicePanel, inGameMenuPanel;
     private HashMap<Pair, JButton> cells;
     private ScalaViewFactory viewFactory;
     public ControllerHnefatafl controller;
     public List<Pair<Int>> possibleMoves;
     private Optional<Pair> selectedCell = Optional.empty();
-    private Menu menuUtils;
+    public Menu menuUtils;
     private Game gameUtils;
     private Board board;
 
@@ -39,14 +39,41 @@ public class GameViewImpl implements GameView, ActionListener {
         frame = viewFactory.createFrame();
         overlayPanel = viewFactory.createOverlayLayoutPanel();
         gamePanel = viewFactory.createGamePanel();
-        initMenu();
+        initMainMenu();
         overlayPanel.add(menuPanel);
+        initVariantsMenu();
+        overlayPanel.add(variantsPanel);
+        initDiffMenu();
+        overlayPanel.add(diffPanel);
+        initPlayerChoiceMenu();
+        overlayPanel.add(playerChoicePanel);
+        initInGameMenu();
+        overlayPanel.add(inGameMenuPanel);
         frame.add(overlayPanel);
         frame.setVisible(true);
     }
 
-    private void initMenu() {
+
+    //Menu principale
+    private void initMainMenu() {
         menuPanel = menuUtils.initMenu();
+    }
+
+
+    private void initVariantsMenu() {
+        variantsPanel = menuUtils.initVariantsMenu();
+    }
+
+    private void initDiffMenu() {
+        diffPanel = menuUtils.initDiffMenu();
+    }
+
+    private void initPlayerChoiceMenu() {
+        playerChoicePanel = menuUtils.initPlayerChoiceMenu();
+    }
+
+    private void initInGameMenu() {
+        inGameMenuPanel = menuUtils.initInGameMenu();
     }
 
     private void initGamePanel(Board board) {
@@ -58,7 +85,7 @@ public class GameViewImpl implements GameView, ActionListener {
             gameUtils.restoreGame();
             overlayPanel.remove(gamePanel);
         }
-        board = controller.newGame(GameVariant.Hnefatafl());
+        board = controller.newGame((GameVariant.Val) menuUtils.boardVariant);
         dimension = (int) Math.sqrt(board.size());
         initGamePanel(board);
         overlayPanel.add(gamePanel);
@@ -66,7 +93,7 @@ public class GameViewImpl implements GameView, ActionListener {
     }
 
     private void showGame(){
-        menuPanel.setVisible(false);
+        playerChoicePanel.setVisible(false);
         gamePanel.setVisible(true);
     }
 
@@ -76,10 +103,16 @@ public class GameViewImpl implements GameView, ActionListener {
         else showGame();
     }
 
+    public void showOverlay(JPanel actualPanel, JPanel panelToShow) {
+        actualPanel.setVisible(false);
+        panelToShow.setVisible(true);
+    }
+
     public void showMenu(){
         menuPanel.setVisible(true);
         gamePanel.setVisible(false);
     }
+
 
     public List<Pair<Int>> getPossibleMoves(Pair coord) {
         return controller.getPossibleMoves(coord);

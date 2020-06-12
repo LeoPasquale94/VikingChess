@@ -46,3 +46,4 @@ object PieceEnum extends Enumeration {
   type PieceType = Value
   val WhitePawn, BlackPawn, WhiteKing, Void = Value
 }
+
