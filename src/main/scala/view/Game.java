@@ -105,11 +105,16 @@ public class Game {
         Tuple3 tuple = gameViewImpl.setMove(coordStart, coordArr);
         Board board = (Board) tuple._1();
         setPawns(board.cells());
+        boardPanel.repaint();
         setColorBackground(colorProvider.getNormalCellColor());
         deselectCell();
         boardPanel.validate();
+
+        //if(gameViewImpl.menuUtils.player)
         rightPanel.add(viewFactory.createLostWhitePawn());
         rightPanel.validate();
+        gamePanel.validate();
+
     }
 
 
@@ -145,13 +150,13 @@ public class Game {
 
 
     private void setPawns(List<BoardCell> positions) {
-        positions.forEach(p -> {
-            cells.get(p.getCoordinate()).removeAll();
+        for(BoardCell p : positions) {
+            if (cells.get(p.getCoordinate()).getComponentCount() > 0) {
+                cells.get(p.getCoordinate()).removeAll();
+            }
             pawnChoice(p);
-            cells.get(p.getCoordinate()).repaint();
-        });
+        }
     }
-
 
     private void pawnChoice(BoardCell c) {
         Enumeration.Value piece = c.getPiece();
@@ -174,7 +179,7 @@ public class Game {
         GridBagConstraints lim = new GridBagConstraints();
 
         menuButton=viewFactory.createGameButton("");
-        menuButton.addActionListener(e-> gameViewImpl.showMenu());
+        menuButton.addActionListener(e-> gameViewImpl.showOverlay(gamePanel, gameViewImpl.inGameMenuPanel));
 
         lim.gridx=0;
         lim.gridy=0;
